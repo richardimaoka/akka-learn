@@ -82,7 +82,7 @@ println(s"materialized value = ${materialized}")
 This will print out,
 
 ```
-materialized value = List() //The result could vary dependent on environment
+materialized value = List() //The result might be different, dependent on environment
 ```
 
 Why is it `List()`? We will [explain the meaning of this bit later](#why-list-was-returned)

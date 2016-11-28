@@ -2,10 +2,10 @@
 
 ## Summary of this article 
 
-* `Source`'s `runForeach` method is equivalent to `runWith()` + `Sink.foreach`
+* `Source`'s `runForeach` method is equivalent to `runWith(Sink.foreach)`
 * A `RunnableGraph`, which is a blueprint to `run()`
 
-## Source code in this artidle
+## Source code in this article
 
 ```
 implicit val system = ActorSystem()
@@ -27,16 +27,16 @@ system.terminate()
 
 ## `Sink` introduced
 
+In the previous article you saw code as below,
+
 ```
 val sourceFromSingle = Source.single(1)
 sourceFromSingle runForeach{ i => println(i) }
 ```
 
-In the previous article you saw code as above.
-
 <img style="display: block; margin: 0 auto;" src="img/Source List.png" width="300px" style="margin: 0 auto">
 
-Inside `runForeach()`, the above code created `Sink` (i.e.) The above code is equivalent to the following:
+The above code is equivalent to the following:
 
 ```
 val sourceFromRange = Source(1 to 5)
@@ -45,7 +45,7 @@ val sinkForEach = Sink.foreach{ i: Int => println(i) } //[Int] is needed
 sourceFromRange.runWith(sinkForEach)
 ```
 
-This creates `Sink`, as well as `Source`, and run the stream with `runWith()` method. 
+(i.e.) inside `runForeach()`, `Sink` was created behind the scene.
 
 <img style="display: block; margin: 0 auto;" src="img/Source-Sink.png" width="300px" style="margin: 0 auto">
 
